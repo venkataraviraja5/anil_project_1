@@ -15,11 +15,11 @@ function classNames(...classes) {
 
 export default function Navbar() {
   return (
-    <div className='p-5'>
+    <div className=''>
     <Disclosure as="nav" className="bg-gray-800 rounded-[10px]">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 absolute top-0 right-0 left-0">
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -126,7 +126,7 @@ export default function Navbar() {
           </div>
 
           <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pt-2 pb-3">
+            <div className="space-y-1 px-2 pt-2 pb-3 absolute top-[50px] bg-gray-800 w-[100%]">
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
