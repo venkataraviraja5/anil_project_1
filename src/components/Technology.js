@@ -51,7 +51,7 @@ export default function Technology() {
             backgroundImage: `url(${images[0].url})`
           }}
         >
-          <div className="flex items-center justify-center flex-col h-auto bg-black/60 w-[100%] h-[400px]">
+          <div className="flex items-center justify-center flex-col h-auto bg-black/60 w-[100%] " style={{height:"400px"}}>
             <h2 className="text-4xl md:text-6xl font-bold mb-4">{images[0].name}</h2>
             <p className="text-[16px] md:text-[14px] max-w-2xl ">
              {images[0].content}
