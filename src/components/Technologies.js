@@ -46,7 +46,7 @@ export default function TechnologiesSection() {
           {technologies.map((tech, index) => (
             <div 
               key={index}
-              className="tech-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center group"
+               className="tech-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center group animate-fade-in-up"
             >
               <div className="w-16 h-16 flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110">
                 {tech.icon}
