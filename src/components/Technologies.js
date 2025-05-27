@@ -1,12 +1,14 @@
-// components/TechnologiesSection.js
-import { 
-  FaReact, FaNodeJs, FaPython, FaAws, 
-  FaDocker, FaGitAlt, FaDatabase, FaJs 
+'use client';
+
+import {
+  FaReact, FaNodeJs, FaPython, FaAws,
+  FaDocker, FaGitAlt, FaDatabase, FaJs
 } from 'react-icons/fa';
-import { 
+import {
   SiNextdotjs, SiTypescript, SiGraphql, SiTailwindcss,
-  SiPostgresql, SiMongodb, SiRedis, SiKubernetes 
+  SiPostgresql, SiMongodb, SiRedis, SiKubernetes
 } from 'react-icons/si';
+import { useEffect, useState } from 'react';
 
 const technologies = [
   { name: "React", icon: <FaReact className="w-8 h-8 text-[#61DAFB]" /> },
@@ -28,36 +30,59 @@ const technologies = [
 ];
 
 export default function TechnologiesSection() {
+  const [loopedTechs, setLoopedTechs] = useState([]);
+
+  useEffect(() => {
+    setLoopedTechs([...technologies, ...technologies]);
+  }, []);
+
   return (
-    <section className="bg-gray-50 dark:bg-gray-900 py-12 sm:py-24 px-4 sm:px-6 lg:px-8">
+    <section className="py-12 sm:py-24 ">
       <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-indigo-700 mb-4">
             Technologies We Use
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Our stack combines cutting-edge technologies to deliver high-performance solutions
+          <p className="text-lg text-black max-w-2xl mx-auto">
+            Our stack combines cutting-edge technologies to deliver high-performance solutions.
           </p>
         </div>
 
-        {/* Technologies Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-          {technologies.map((tech, index) => (
-            <div 
-              key={index}
-               className="tech-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center group animate-fade-in-up"
-            >
-              <div className="w-16 h-16 flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110">
+        {/* Marquee */}
+        <div className="relative overflow-hidden">
+          <div className="animate-marquee whitespace-nowrap flex space-x-6">
+            {loopedTechs.map((tech, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center justify-center bg-white dark:bg-gray-800 rounded-xl shadow p-4 w-32 h-32 shrink-0 group hover:scale-105 transition-transform"
+              >
                 {tech.icon}
+                <span className="text-sm mt-2 text-gray-800 dark:text-white group-hover:text-blue-500">
+                  {tech.name}
+                </span>
               </div>
-              <h3 className="text-lg font-medium text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                {tech.name}
-              </h3>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
+
+      {/* Custom CSS for animation */}
+      <style jsx>{`
+        .animate-marquee {
+          display: flex;
+          animation: marquee 25s linear infinite;
+        }
+
+        @keyframes marquee {
+          0% {
+            transform: translateX(0%);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+      `}</style>
     </section>
   );
 }
