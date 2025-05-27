@@ -2,6 +2,7 @@ import ChooseUs from "@/components/ChooseUs";
 import IndustrySolutions from "@/components/IndustrySolutions";
 import Services from "@/components/Services";
 import TechnologiesSection from "@/components/Technologies";
+import ContactBanner from "@/components/ContactUsBanner";
 // components/Benefits.js
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <TechnologiesSection />
       <IndustrySolutions />
       <ChooseUs />
+      <ContactBanner />
     </>
   );
 }
