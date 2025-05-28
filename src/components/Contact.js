@@ -8,6 +8,13 @@ const NUM_DROPS = 100;
 
 export default function ContactPage() {
   const [drops, setDrops] = useState([]);
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState("");
+
+  const handleChange = (e) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
 
   useEffect(() => {
     const tempDrops = Array.from({ length: NUM_DROPS }).map((_, i) => {
@@ -28,6 +35,29 @@ export default function ContactPage() {
     });
     setDrops(tempDrops);
   }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("Sending...");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        setStatus("Message sent!");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setStatus(data.error || "Failed to send");
+      }
+    } catch (err) {
+      setStatus("Server error");
+    }
+  };
 
   return (
     <div className="relative min-h-screen bg-gray-900 overflow-hidden">
@@ -59,7 +89,7 @@ export default function ContactPage() {
             className="bg-white/10 backdrop-blur-md rounded-2xl shadow-xl overflow-hidden p-8 border border-white/10"
           >
             <h2 className="text-2xl font-bold text-white mb-6">Send us a message</h2>
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-300">
                   Name
@@ -67,6 +97,9 @@ export default function ContactPage() {
                 <input
                   type="text"
                   id="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  name='name'
                   className="mt-1 block w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white"
                 />
               </div>
@@ -77,6 +110,9 @@ export default function ContactPage() {
                 <input
                   type="email"
                   id="email"
+                  name='email'
+                  value={formData.email}
+                  onChange={handleChange}
                   className="mt-1 block w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white"
                 />
               </div>
@@ -87,6 +123,9 @@ export default function ContactPage() {
                 <textarea
                   id="message"
                   rows={4}
+                  name='message'
+                  value={formData.message}
+                  onChange={handleChange}
                   className="mt-1 block w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white"
                 ></textarea>
               </div>
@@ -97,6 +136,7 @@ export default function ContactPage() {
               >
                 Send Message
               </motion.button>
+              <p className="text-sm">{status}</p>
             </form>
           </motion.div>
 
