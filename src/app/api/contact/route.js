@@ -18,7 +18,7 @@ export async function POST(request) {
 
     const mailOptions = {
       from: email,
-      to: process.env.ADMIN_EMAIL,
+      to: "venkataraviraja5@gmail.com",
       subject: `📩 New Contact Message from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`, // plain fallback
       html: `
@@ -44,6 +44,6 @@ export async function POST(request) {
     return new Response(JSON.stringify({ success: true, message: 'Email sent!' }), { status: 200 });
   } catch (error) {
     console.error(error);
-    return new Response(JSON.stringify({ error: 'Server error' }), { status: 500 });
+    return new Response(JSON.stringify({ error: `Server error -- >  ${error}` }), { status: 500 });
   }
 }
