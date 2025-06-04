@@ -1,40 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
 
-const NUM_DROPS = 100;
-
 export default function ContactPage() {
-  const [drops, setDrops] = useState([]);
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("");
 
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
-
-
-  useEffect(() => {
-    const tempDrops = Array.from({ length: NUM_DROPS }).map((_, i) => {
-      const left = Math.random() * 100;
-      const delay = Math.random() * -20;
-      const duration = 0.5 + Math.random() * 1.5;
-      return (
-        <div
-          key={i}
-          className="drop"
-          style={{
-            left: `${left}%`,
-            animationDuration: `${duration}s`,
-            animationDelay: `${delay}s`,
-          }}
-        />
-      );
-    });
-    setDrops(tempDrops);
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,12 +36,9 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-gray-900 overflow-hidden">
-      {/* Rain background */}
-      <div className="rain">{drops}</div>
-
+    <div className="min-h-screen bg-gray-900">
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -86,7 +59,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-white/10 backdrop-blur-md rounded-2xl shadow-xl overflow-hidden p-8 border border-white/10"
+            className="bg-gray-800 rounded-2xl shadow-xl overflow-hidden p-8 border border-gray-700"
           >
             <h2 className="text-2xl font-bold text-white mb-6">Send us a message</h2>
             <form className="space-y-6" onSubmit={handleSubmit}>
@@ -100,7 +73,8 @@ export default function ContactPage() {
                   value={formData.name}
                   onChange={handleChange}
                   name='name'
-                  className="mt-1 block w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white"
+                  className="mt-1 block w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white"
+                  required
                 />
               </div>
               <div>
@@ -113,7 +87,8 @@ export default function ContactPage() {
                   name='email'
                   value={formData.email}
                   onChange={handleChange}
-                  className="mt-1 block w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white"
+                  className="mt-1 block w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white"
+                  required
                 />
               </div>
               <div>
@@ -126,17 +101,19 @@ export default function ContactPage() {
                   name='message'
                   value={formData.message}
                   onChange={handleChange}
-                  className="mt-1 block w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white"
+                  className="mt-1 block w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white"
+                  required
                 ></textarea>
               </div>
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
+                type="submit"
                 className="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all"
               >
                 Send Message
               </motion.button>
-              <p className="text-sm">{status}</p>
+              {status && <p className={`text-sm ${status === "Message sent!" ? 'text-green-400' : 'text-yellow-400'}`}>{status}</p>}
             </form>
           </motion.div>
 
@@ -147,11 +124,11 @@ export default function ContactPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="space-y-8"
           >
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl shadow-xl overflow-hidden p-8 border border-white/10">
+            <div className="bg-gray-800 rounded-2xl shadow-xl overflow-hidden p-8 border border-gray-700">
               <h2 className="text-2xl font-bold text-white mb-6">Contact Information</h2>
               <div className="space-y-6">
                 <div className="flex items-start">
-                  <div className="flex-shrink-0 bg-purple-100/10 p-3 rounded-lg backdrop-blur-sm">
+                  <div className="flex-shrink-0 bg-purple-500/10 p-3 rounded-lg">
                     <FiMail className="h-6 w-6 text-purple-400" />
                   </div>
                   <div className="ml-4">
@@ -161,7 +138,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start">
-                  <div className="flex-shrink-0 bg-blue-100/10 p-3 rounded-lg backdrop-blur-sm">
+                  <div className="flex-shrink-0 bg-blue-500/10 p-3 rounded-lg">
                     <FiPhone className="h-6 w-6 text-blue-400" />
                   </div>
                   <div className="ml-4">
@@ -171,7 +148,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start">
-                  <div className="flex-shrink-0 bg-pink-100/10 p-3 rounded-lg backdrop-blur-sm">
+                  <div className="flex-shrink-0 bg-pink-500/10 p-3 rounded-lg">
                     <FiMapPin className="h-6 w-6 text-pink-400" />
                   </div>
                   <div className="ml-4">
@@ -184,7 +161,7 @@ export default function ContactPage() {
 
             <motion.div
               whileHover={{ scale: 1.01 }}
-              className="relative h-64 rounded-2xl shadow-xl overflow-hidden bg-gray-800/50 border border-white/10"
+              className="relative h-64 rounded-2xl shadow-xl overflow-hidden bg-gray-800 border border-gray-700"
             >
               <div className="absolute inset-0 flex items-center justify-center">
                 <span className="text-gray-400">Map would appear here</span>

@@ -16,61 +16,71 @@ const services = [
     title: "Custom Software Development",
     description: "Tailored solutions designed to streamline your business operations with scalable, secure applications built using modern technologies.",
     image: customSoftware,
-    alt: "Team collaborating on software development"
+    alt: "Team collaborating on software development",
+    url:'/customsoftware'
   },
   {
     title: "Web Application Development",
     description: "High-performance web applications with intuitive interfaces that drive engagement and conversions for your business.",
     image: webDevImage,
-    alt: "Web application dashboard on multiple devices"
+    alt: "Web application dashboard on multiple devices",
+    url:'/webdevelopment'
   },
   {
     title: "Mobile App Development",
     description: "Native and cross-platform mobile applications that deliver seamless user experiences on iOS and Android platforms.",
     image: mobileDev,
-    alt: "Mobile app development process"
+    alt: "Mobile app development process",
+    url:'/appdevelopment'
   },
   {
     title: "UI/UX Design",
     description: "User-centered design solutions that enhance usability and create memorable digital experiences for your customers.",
     image: ui_ux,
-    alt: "Designer creating user interface wireframes"
+    alt: "Designer creating user interface wireframes",
+    url:'/uiux'
   },
   {
     title: "Cloud Solutions",
     description: "Secure, scalable cloud infrastructure and migration services to optimize your business operations and reduce costs.",
     image: cloud_dev,
-    alt: "Cloud computing infrastructure diagram"
+    alt: "Cloud computing infrastructure diagram",
+    url:'/cloud'
   },
   {
     title: "DevOps & CI/CD",
     description: "Automated deployment pipelines and infrastructure as code to accelerate your development cycles and improve reliability.",
     image: devops_dev,
-    alt: "DevOps automation workflow"
+    alt: "DevOps automation workflow",
+     url:'/devops'
   },
   {
   title: "AI Development",
   description: "Custom AI and machine learning solutions to automate workflows, enhance decision-making, and deliver intelligent customer experiences.",
   image: ai_dev,
-  alt: "Artificial intelligence development illustration"
+  alt: "Artificial intelligence development illustration",
+  url:'/ai'
 },
 {
   title: "E-Commerce Solutions",
   description: "End-to-end e-commerce development, including storefront design, payment integration, and performance optimization to drive online sales.",
   image: ecommerce_dev,
-  alt: "E-commerce platform design and shopping cart icons"
+  alt: "E-commerce platform design and shopping cart icons",
+  url:'/ecommerce'
 },
 {
   title: "Blockchain Development",
   description: "Decentralized app (dApp) and smart contract development on Ethereum, Solana, and other blockchain platforms for secure, transparent solutions.",
   image: blockchain_dev,
-  alt: "Blockchain network and smart contract concept illustration"
+  alt: "Blockchain network and smart contract concept illustration",
+  url:'/blockchain'
 },
 {
   title: "Graphic Design",
   description: "Creative branding, UI/UX design, and marketing assets crafted to visually engage and communicate your brand effectively across all channels.",
   image: graphic_design,
-  alt: "Modern graphic design elements and color palette"
+  alt: "Modern graphic design elements and color palette",
+  url:'/graphicdesign'
 }
 
 ];
@@ -115,6 +125,7 @@ export default function ServicesSection() {
                 <p className="text-gray-600 dark:text-gray-300 mb-4" itemProp="description">
                   {service.description}
                 </p>
+                <a href={service.url} className='text-blue-500 underline'>Read more</a>
               </div>
             </article>
           ))}
